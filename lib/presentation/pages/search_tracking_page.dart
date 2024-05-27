@@ -2,21 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wifipos_web/core/components/input_search.dart';
 import 'package:wifipos_web/core/constants/fonts.dart';
-import 'package:wifipos_web/data/datasources/search_history.dart';
-import 'package:wifipos_web/data/models/tracking_response_model.dart';
+import 'package:wifipos_web/data/datasources/history_local_datasource.dart';
 import 'package:wifipos_web/presentation/bloc/tracking_bloc/tracking_bloc.dart';
 
 import '../../core/components/button_gradient.dart';
 import '../../core/components/responsive_widget.dart';
 
-class SearchPage extends StatefulWidget {
-  const SearchPage({super.key});
+class SearchTrackingPage extends StatefulWidget {
+  const SearchTrackingPage({super.key});
 
   @override
-  State<SearchPage> createState() => _SearchPageState();
+  State<SearchTrackingPage> createState() => _SearchTrackingPageState();
 }
 
-class _SearchPageState extends State<SearchPage> {
+class _SearchTrackingPageState extends State<SearchTrackingPage> {
   final TextEditingController searchController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
@@ -40,16 +39,11 @@ class _SearchPageState extends State<SearchPage> {
     super.dispose();
   }
 
-  void _handleTrackingSearchResponse(List<Data> searchResults) {
-    for (var result in searchResults) {
-      SearchHistory().addSearchEntry(result);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: AppBar(
+      appBar: AppBar(
         backgroundColor: const Color(0xff0CBAF9),
       ),
       body: SingleChildScrollView(
@@ -59,7 +53,7 @@ class _SearchPageState extends State<SearchPage> {
               margin: const EdgeInsets.symmetric(vertical: 40),
               child: ResponsiveWidget(
                 mobile: buildMobileContent(),
-                tablet: buildTabletContent(),
+                tablet: buildDekstopContent(),
                 desktop: buildDekstopContent(),
               ),
             ),
@@ -218,158 +212,12 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
-  Widget buildTabletContent() {
-    return Center(
-      child: Column(
-        children: [
-          Text(
-            'Silahkan Masukkan Username Untuk Tracking',
-            style: AppFont.blackText.copyWith(
-              fontSize: 24,
-              fontWeight: semiBold,
-            ),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 30),
-          SizedBox(
-            width: 500,
-            child: Form(
-              key: _formKey,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: InputSearch(
-                      controller: searchController,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Username tidak boleh kosong';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  ButtonGradient(
-                    text: 'Search',
-                    onPressed: () {
-                      _buttonSearch(context);
-                    },
-                    width: 100,
-                    height: 48,
-                  ),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(height: 20),
-          BlocBuilder<TrackingBloc, TrackingState>(
-            builder: (context, state) {
-              if (state is TrackingSearchLoaded) {
-                if (state.listTracking.isEmpty) {
-                  return Center(
-                    child: Text(
-                      'Data tidak ditemukan',
-                      style: AppFont.blackText.copyWith(
-                        fontSize: 16,
-                        fontWeight: medium,
-                      ),
-                    ),
-                  );
-                }
-                return DataTable(
-                  columns: [
-                    DataColumn(
-                      label: Text(
-                        'Username',
-                        style: AppFont.blackText.copyWith(
-                          fontSize: 16,
-                          fontWeight: bold,
-                        ),
-                      ),
-                    ),
-                    DataColumn(
-                      label: Text(
-                        'Date',
-                        style: AppFont.blackText.copyWith(
-                          fontSize: 16,
-                          fontWeight: bold,
-                        ),
-                      ),
-                    ),
-                    DataColumn(
-                      label: Text(
-                        'Time',
-                        style: AppFont.blackText.copyWith(
-                          fontSize: 16,
-                          fontWeight: bold,
-                        ),
-                      ),
-                    ),
-                    DataColumn(
-                      label: Text(
-                        'Lokasi',
-                        style: AppFont.blackText.copyWith(
-                          fontSize: 16,
-                          fontWeight: bold,
-                        ),
-                      ),
-                    ),
-                  ],
-                  rows: state.listTracking.map((tracking) {
-                    return DataRow(
-                      cells: [
-                        DataCell(
-                          Text(
-                            tracking.username,
-                            style: AppFont.blackText.copyWith(),
-                          ),
-                        ),
-                        DataCell(
-                          Text(
-                            tracking.date,
-                            style: AppFont.blackText.copyWith(),
-                          ),
-                        ),
-                        DataCell(
-                          Text(
-                            tracking.time,
-                            style: AppFont.blackText.copyWith(),
-                          ),
-                        ),
-                        DataCell(
-                          Text(
-                            tracking.lokasi,
-                            style: AppFont.blackText.copyWith(),
-                          ),
-                        ),
-                      ],
-                    );
-                  }).toList(),
-                );
-              }
-
-              if (state is TrackingSearchLoading) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-
-              return const Center(
-                child: SizedBox(),
-              );
-            },
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget buildDekstopContent() {
     return Center(
       child: Column(
         children: [
           Text(
-            'Silahkan Masukkan Username Untuk Tracking',
+            'Masukkan Username Untuk Tracking',
             style: AppFont.blackText.copyWith(
               fontSize: 28,
               fontWeight: semiBold,
@@ -411,7 +259,8 @@ class _SearchPageState extends State<SearchPage> {
           BlocBuilder<TrackingBloc, TrackingState>(
             builder: (context, state) {
               if (state is TrackingSearchLoaded) {
-                _handleTrackingSearchResponse(state.listTracking);
+                HistoryLocalDatasource().saveHistorySearch(state.listTracking);
+                // _handleTrackingSearchResponse(state.listTracking);
                 if (state.listTracking.isEmpty) {
                   return Center(
                     child: Text(

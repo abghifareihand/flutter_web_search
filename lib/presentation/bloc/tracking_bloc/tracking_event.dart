@@ -10,3 +10,5 @@ class SearchTracking extends TrackingEvent {
     required this.query,
   });
 }
+
+class ResetTracking extends TrackingEvent {}

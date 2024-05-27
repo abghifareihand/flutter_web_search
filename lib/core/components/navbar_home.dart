@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:wifipos_web/core/components/button_gradient.dart';
+import 'package:wifipos_web/data/datasources/auth_local_datasource.dart';
 import 'package:wifipos_web/presentation/pages/download_page.dart';
 import 'package:wifipos_web/presentation/pages/kontak_page.dart';
-import 'package:wifipos_web/presentation/pages/login_page.dart';
+import 'package:wifipos_web/presentation/pages/landing_page.dart';
 import 'package:wifipos_web/presentation/pages/tentang_page.dart';
 import '../constants/fonts.dart';
 import 'responsive_widget.dart';
 
-class CustomNavbar extends StatelessWidget {
-  const CustomNavbar({super.key});
+class NavbarHome extends StatelessWidget {
+  const NavbarHome({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const ResponsiveWidget(
       desktop: DesktopNavbar(),
       mobile: MobileNavbar(),
-      tablet: TabletNavbar(),
+      tablet: DesktopNavbar(),
     );
   }
 }
@@ -37,16 +37,16 @@ class DesktopNavbar extends StatelessWidget {
           ),
           Row(
             children: [
-              TextButton(
-                onPressed: () {},
-                child: Text(
-                  'Home',
-                  style: AppFont.blackText.copyWith(
-                    fontSize: 16,
-                    fontWeight: medium,
-                  ),
-                ),
-              ),
+              // TextButton(
+              //   onPressed: () {},
+              //   child: Text(
+              //     'Home',
+              //     style: AppFont.blackText.copyWith(
+              //       fontSize: 16,
+              //       fontWeight: medium,
+              //     ),
+              //   ),
+              // ),
               const SizedBox(width: 20),
               TextButton(
                 onPressed: () {
@@ -101,19 +101,42 @@ class DesktopNavbar extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(width: 40),
-              ButtonGradient(
-                text: 'Login',
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const LoginPage(),
+              const SizedBox(width: 20),
+              PopupMenuButton(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                offset: const Offset(0, 60),
+                iconSize: 40,
+                icon: Image.asset(
+                  'assets/images/user.png',
+                ),
+                itemBuilder: (context) => [
+                  PopupMenuItem(
+                    child: SizedBox(
+                      width: 100,
+                      child: InkWell(
+                        onTap: () {
+                          AuthLocalDatasource().removeAuthData();
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const LandingPage(),
+                            ),
+                            (route) => false,
+                          );
+                        },
+                        child: Text(
+                          'Logout',
+                          style: AppFont.blackText.copyWith(
+                            fontSize: 16,
+                            fontWeight: medium,
+                          ),
+                        ),
+                      ),
                     ),
-                  );
-                },
-                width: 100,
-                height: 50,
+                  ),
+                ],
               ),
             ],
           ),
@@ -205,18 +228,20 @@ class TabletNavbar extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 40),
-              ButtonGradient(
-                text: 'Login',
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const LoginPage(),
+              PopupMenuButton(
+                icon: Image.asset(
+                  width: 70,
+                  height: 70,
+                  'assets/images/user.png',
+                ),
+                itemBuilder: (context) => [
+                  PopupMenuItem(
+                    child: ListTile(
+                      title: const Text('Logout'),
+                      onTap: () {},
                     ),
-                  );
-                },
-                width: 100,
-                height: 50,
+                  ),
+                ],
               ),
             ],
           ),
@@ -282,11 +307,11 @@ class MobileDrawer extends StatelessWidget {
             ),
             onTap: () {
               Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const DownloadPage(),
-                    ),
-                  );
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const DownloadPage(),
+                ),
+              );
             },
           ),
           ListTile(
@@ -325,18 +350,10 @@ class MobileDrawer extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.all(16),
-            child: ButtonGradient(
-              text: 'Login',
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const LoginPage(),
-                  ),
-                );
-              },
-              width: double.infinity,
+            child: Image.asset(
+              width: 50,
               height: 50,
+              'assets/images/user.png',
             ),
           ),
         ],

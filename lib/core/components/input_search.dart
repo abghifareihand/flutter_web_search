@@ -4,9 +4,11 @@ import 'package:wifipos_web/core/constants/fonts.dart';
 
 class InputSearch extends StatelessWidget {
   final TextEditingController controller;
+  final String? Function(String?)? validator;
   const InputSearch({
     super.key,
     required this.controller,
+      this.validator,
   });
 
   @override
@@ -24,7 +26,7 @@ class InputSearch extends StatelessWidget {
           fontWeight: medium,
         ),
         decoration: InputDecoration(
-          hintText: 'Search username atau lokasi',
+          hintText: 'Masukkan username',
           hintStyle: AppFont.greyText.copyWith(
             fontSize: 14,
             fontWeight: regular,
@@ -49,6 +51,7 @@ class InputSearch extends StatelessWidget {
             horizontal: 12.0,
           ),
         ),
+        validator: validator,
       ),
     );
   }

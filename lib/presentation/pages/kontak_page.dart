@@ -9,6 +9,9 @@ class KontakPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+       appBar: AppBar(
+        backgroundColor: const Color(0xff0CBAF9),
+      ),
       body: ListView(
         children: [
           Container(

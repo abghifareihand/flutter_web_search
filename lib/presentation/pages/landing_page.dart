@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:wifipos_web/core/components/custom_navbar.dart';
+import 'package:wifipos_web/core/components/navbar_landing.dart';
 import 'package:wifipos_web/presentation/pages/search_page.dart';
 
 import '../../core/components/button_gradient.dart';
@@ -16,7 +16,7 @@ class LandingPage extends StatelessWidget {
       drawer: ResponsiveWidget.isMobile(context) ? const MobileDrawer() : null,
       body: ListView(
         children: [
-          const CustomNavbar(),
+          const NavbarLanding(),
           Container(
             padding: EdgeInsets.symmetric(
               horizontal: MediaQuery.of(context).size.width * 0.05,
@@ -40,7 +40,7 @@ class MobileContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
           'Wifi\nPositioning System',
@@ -63,6 +63,20 @@ class MobileContent extends StatelessWidget {
           height: 50,
           text: 'Download Now',
           onPressed: _launchUrl,
+        ),
+        const SizedBox(height: 20),
+        ButtonGradient(
+          width: 200,
+          height: 50,
+          text: 'Tracking',
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const SearchPage(),
+              ),
+            );
+          },
         ),
         const SizedBox(height: 20),
         Center(
@@ -106,12 +120,30 @@ class TabletContent extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 40),
-              const ButtonGradient(
-                width: 200,
-                height: 50,
-                text: 'Download Now',
-                onPressed: _launchUrl,
-              )
+              Row(
+                children: [
+                  const ButtonGradient(
+                    width: 200,
+                    height: 50,
+                    text: 'Download Now',
+                    onPressed: _launchUrl,
+                  ),
+                  const SizedBox(width: 20),
+                  ButtonGradient(
+                    width: 200,
+                    height: 50,
+                    text: 'Tracking',
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SearchPage(),
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
             ],
           ),
           Image.asset(
@@ -154,18 +186,29 @@ class DesktopContent extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 40),
-              ButtonGradient(
-                width: 200,
-                height: 50,
-                text: 'Download Now',
-                // onPressed: _launchUrl,
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => SearchPage(),
-                      ));
-                },
+              Row(
+                children: [
+                  const ButtonGradient(
+                    width: 200,
+                    height: 50,
+                    text: 'Download Now',
+                    onPressed: _launchUrl,
+                  ),
+                  const SizedBox(width: 20),
+                  ButtonGradient(
+                    width: 200,
+                    height: 50,
+                    text: 'Tracking',
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SearchPage(),
+                        ),
+                      );
+                    },
+                  ),
+                ],
               ),
             ],
           ),
