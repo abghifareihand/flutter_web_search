@@ -149,7 +149,7 @@ class DesktopContent extends StatelessWidget {
                   ButtonGradient(
                     width: 200,
                     height: 50,
-                    text: 'Search Tracking',
+                    text: 'Tracking',
                     onPressed: () {
                       Navigator.push(
                         context,
