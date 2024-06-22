@@ -5,7 +5,6 @@ import 'package:wifipos_web/presentation/widgets/tracking_shimmer.dart';
 import '../../core/components/responsive_widget.dart';
 import '../../core/constants/fonts.dart';
 import '../bloc/tracking_bloc/tracking_bloc.dart';
-import 'package:shimmer/shimmer.dart';
 
 class HistoryTrackingPage extends StatefulWidget {
   const HistoryTrackingPage({super.key});

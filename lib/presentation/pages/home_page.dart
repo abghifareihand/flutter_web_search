@@ -4,8 +4,6 @@ import 'package:wifipos_web/core/components/button_gradient.dart';
 import 'package:wifipos_web/core/components/navbar_home.dart';
 import 'package:wifipos_web/core/constants/fonts.dart';
 import 'package:wifipos_web/data/datasources/auth_local_datasource.dart';
-import 'package:wifipos_web/presentation/pages/history_tracking_page.dart';
-import 'package:wifipos_web/presentation/pages/search_tracking_page.dart';
 import '../../core/components/responsive_widget.dart';
 import '../bloc/tracking_bloc/tracking_bloc.dart';
 

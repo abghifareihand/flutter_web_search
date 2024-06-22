@@ -1,7 +1,5 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:wifipos_web/presentation/pages/home_page.dart';
-import 'package:wifipos_web/presentation/pages/landing_page.dart';
 
 import '../../data/datasources/auth_local_datasource.dart';
 
