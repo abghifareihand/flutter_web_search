@@ -77,7 +77,11 @@ class MobileContent extends StatelessWidget {
         ),
         const SizedBox(height: 20),
         ButtonGradient(
-            width: 200, height: 50, text: 'Tracking', onPressed: () {}),
+          width: 200,
+          height: 50,
+          text: 'Tracking',
+          onPressed: () {},
+        ),
         const SizedBox(height: 20),
         Center(
           child: Image.asset(
@@ -137,12 +141,13 @@ class DesktopContent extends StatelessWidget {
                     height: 50,
                     text: 'History Tracking',
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const HistoryTrackingPage(),
-                        ),
-                      );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) => const HistoryTrackingPage(),
+                      //   ),
+                      // );
+                      Navigator.pushNamed(context, '/history');
                     },
                   ),
                   const SizedBox(width: 20),
@@ -151,12 +156,13 @@ class DesktopContent extends StatelessWidget {
                     height: 50,
                     text: 'Tracking',
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const SearchTrackingPage(),
-                        ),
-                      );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) => const SearchTrackingPage(),
+                      //   ),
+                      // );
+                      Navigator.pushNamed(context, '/tracking');
                     },
                   ),
                 ],

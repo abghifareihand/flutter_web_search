@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wifipos_web/core/components/loading_spinkit.dart';
-import 'package:wifipos_web/presentation/pages/home_page.dart';
 import 'package:wifipos_web/presentation/bloc/login_bloc/login_bloc.dart';
 import '../../core/components/input_field.dart';
 import '../../core/components/responsive_widget.dart';
@@ -146,12 +145,7 @@ class _LoginPageState extends State<LoginPage> {
         child: BlocConsumer<LoginBloc, LoginState>(
           listener: (context, state) {
             if (state is LoginLoaded) {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const HomePage(),
-                ),
-              );
+              Navigator.pushReplacementNamed(context, '/home');
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(state.loginResponse.message),

@@ -31,21 +31,11 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   void _navigateToHomePage() {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const HomePage(),
-      ),
-    );
+    Navigator.pushReplacementNamed(context, '/home');
   }
 
   void _navigateToLandingPage() {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const LandingPage(),
-      ),
-    );
+    Navigator.pushReplacementNamed(context, '/');
   }
 
   @override

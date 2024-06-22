@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wifipos_web/data/datasources/auth_local_datasource.dart';
 import 'package:wifipos_web/presentation/pages/download_page.dart';
-import 'package:wifipos_web/presentation/pages/kontak_page.dart';
-import 'package:wifipos_web/presentation/pages/landing_page.dart';
-import 'package:wifipos_web/presentation/pages/tentang_page.dart';
 import '../constants/fonts.dart';
 import 'responsive_widget.dart';
 
@@ -37,25 +34,11 @@ class DesktopNavbar extends StatelessWidget {
           ),
           Row(
             children: [
-              // TextButton(
-              //   onPressed: () {},
-              //   child: Text(
-              //     'Home',
-              //     style: AppFont.blackText.copyWith(
-              //       fontSize: 16,
-              //       fontWeight: medium,
-              //     ),
-              //   ),
-              // ),
               const SizedBox(width: 20),
               TextButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const DownloadPage(),
-                    ),
-                  );
+           
+                  Navigator.pushNamed(context, '/download');
                 },
                 child: Text(
                   'Download',
@@ -68,12 +51,8 @@ class DesktopNavbar extends StatelessWidget {
               const SizedBox(width: 20),
               TextButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const KontakPage(),
-                    ),
-                  );
+       
+                  Navigator.pushNamed(context, '/kontak');
                 },
                 child: Text(
                   'Kontak',
@@ -86,12 +65,8 @@ class DesktopNavbar extends StatelessWidget {
               const SizedBox(width: 20),
               TextButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const TentangPage(),
-                    ),
-                  );
+             
+                  Navigator.pushNamed(context, '/tentang');
                 },
                 child: Text(
                   'Tentang',
@@ -118,11 +93,10 @@ class DesktopNavbar extends StatelessWidget {
                       child: InkWell(
                         onTap: () {
                           AuthLocalDatasource().removeAuthData();
-                          Navigator.pushAndRemoveUntil(
+                    
+                          Navigator.pushNamedAndRemoveUntil(
                             context,
-                            MaterialPageRoute(
-                              builder: (context) => const LandingPage(),
-                            ),
+                            '/',
                             (route) => false,
                           );
                         },
@@ -176,12 +150,7 @@ class TabletNavbar extends StatelessWidget {
               const SizedBox(width: 20),
               TextButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const DownloadPage(),
-                    ),
-                  );
+                  Navigator.pushNamed(context, '/download');
                 },
                 child: Text(
                   'Download',
@@ -194,12 +163,8 @@ class TabletNavbar extends StatelessWidget {
               const SizedBox(width: 20),
               TextButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const KontakPage(),
-                    ),
-                  );
+            
+                  Navigator.pushNamed(context, '/kontak');
                 },
                 child: Text(
                   'Kontak',
@@ -212,12 +177,8 @@ class TabletNavbar extends StatelessWidget {
               const SizedBox(width: 20),
               TextButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const TentangPage(),
-                    ),
-                  );
+      
+                  Navigator.pushNamed(context, '/tentang');
                 },
                 child: Text(
                   'Tentang',
@@ -238,7 +199,13 @@ class TabletNavbar extends StatelessWidget {
                   PopupMenuItem(
                     child: ListTile(
                       title: const Text('Logout'),
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          '/',
+                          (route) => false,
+                        );
+                      },
                     ),
                   ),
                 ],
@@ -323,12 +290,13 @@ class MobileDrawer extends StatelessWidget {
               ),
             ),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const KontakPage(),
-                ),
-              );
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) => const KontakPage(),
+              //   ),
+              // );
+              Navigator.pushNamed(context, '/kontak');
             },
           ),
           ListTile(
@@ -340,12 +308,13 @@ class MobileDrawer extends StatelessWidget {
               ),
             ),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const TentangPage(),
-                ),
-              );
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) => const TentangPage(),
+              //   ),
+              // );
+              Navigator.pushNamed(context, '/tentang');
             },
           ),
           Padding(

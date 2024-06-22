@@ -134,12 +134,13 @@ class TabletContent extends StatelessWidget {
                     height: 50,
                     text: 'Tracking',
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const SearchPage(),
-                        ),
-                      );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) => const SearchPage(),
+                      //   ),
+                      // );
+                      Navigator.pushNamed(context, '/all-tracking');
                     },
                   ),
                 ],
@@ -200,12 +201,13 @@ class DesktopContent extends StatelessWidget {
                     height: 50,
                     text: 'Tracking',
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const SearchPage(),
-                        ),
-                      );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) => const SearchPage(),
+                      //   ),
+                      // );
+                      Navigator.pushNamed(context, '/all-tracking');
                     },
                   ),
                 ],

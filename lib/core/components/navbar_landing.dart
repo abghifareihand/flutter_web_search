@@ -39,12 +39,7 @@ class DesktopNavbar extends StatelessWidget {
             children: [
               TextButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const KontakPage(),
-                    ),
-                  );
+                  Navigator.pushNamed(context, '/kontak');
                 },
                 child: Text(
                   'Kontak',
@@ -57,12 +52,7 @@ class DesktopNavbar extends StatelessWidget {
               const SizedBox(width: 20),
               TextButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const TentangPage(),
-                    ),
-                  );
+                  Navigator.pushNamed(context, '/tentang');
                 },
                 child: Text(
                   'Tentang',
@@ -76,12 +66,7 @@ class DesktopNavbar extends StatelessWidget {
               ButtonGradient(
                 text: 'Login',
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const LoginPage(),
-                    ),
-                  );
+                  Navigator.pushNamed(context, '/login');
                 },
                 width: 100,
                 height: 50,
@@ -150,12 +135,7 @@ class TabletNavbar extends StatelessWidget {
               ButtonGradient(
                 text: 'Login',
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const LoginPage(),
-                    ),
-                  );
+                  Navigator.pushNamed(context, '/login');
                 },
                 width: 100,
                 height: 50,
